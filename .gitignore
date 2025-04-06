@@ -1,0 +1,15 @@
+# Emacs
+*~
+.#*
+
+# Vim
+*.swp
+*.swo
+
+# Mac
+.DS_Store
+
+# Compilation
+*.o
+*.out
+*.exe
