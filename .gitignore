@@ -13,3 +13,7 @@
 *.o
 *.out
 *.exe
+
+
+#bin
+bin/
