@@ -5,6 +5,7 @@
 #include <vector>
 #include <mutex>
 #include <condition_variable>
+#include "util/random-generator.h"
 
 class ProducerConsumer {
 public:
@@ -17,6 +18,7 @@ private:
     std::vector<int> buffer;
     std::mutex mtx;
     std::condition_variable cv;
+    RandomGenerator rng;
 };
 
 #endif
