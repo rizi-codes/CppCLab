@@ -5,7 +5,7 @@
 
 #include "concurrency/PrintThreadSafe.h"
 #include "concurrency/ProducerConsumer.h"
-#include "util/random-generator.h"
+#include "util/RandomGenerator.h"
 
 ProducerConsumer::ProducerConsumer(int maxSize) : maxSize(maxSize), rng() {
   buffer.reserve(maxSize);

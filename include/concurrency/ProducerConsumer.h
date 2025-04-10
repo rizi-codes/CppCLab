@@ -1,7 +1,7 @@
 #ifndef PRODUCERCONSUMER_H
 #define PRODUCERCONSUMER_H
 
-#include "util/random-generator.h"
+#include "util/RandomGenerator.h"
 #include <condition_variable>
 #include <mutex>
 #include <vector>
