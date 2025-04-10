@@ -7,6 +7,7 @@
 
 class ThreadSafeInt {
 public:
+  explicit ThreadSafeInt(int value);
   void readInt();
   void writeInt(int newValue);
 

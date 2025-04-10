@@ -1,6 +1,8 @@
 #include "concurrency/ThreadSafeInt.h"
 #include "concurrency/ThreadSafePrint.h"
 
+ThreadSafeInt::ThreadSafeInt(int value) : data(value) {}
+
 void ThreadSafeInt::readInt() {
   std::unique_lock<std::mutex> lock(mtx);
   writer_cv.wait(lock, [this] { return !writerActive; });
@@ -23,7 +25,6 @@ void ThreadSafeInt::writeInt(int newValue) {
   reader_cv.wait(lock, [this] { return readersCount == 0 && !writerActive; });
 
   writerActive = true;
-  lock.unlock();
 
   data = newValue;
   ThreadSafePrint::print("Write: ", newValue);
