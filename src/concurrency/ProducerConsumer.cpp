@@ -3,8 +3,8 @@
 #include <mutex>
 #include <thread>
 
-#include "concurrency/PrintThreadSafe.h"
 #include "concurrency/ProducerConsumer.h"
+#include "concurrency/ThreadSafePrint.h"
 #include "util/RandomGenerator.h"
 
 ProducerConsumer::ProducerConsumer(int maxSize) : maxSize(maxSize), rng() {
@@ -16,7 +16,7 @@ void ProducerConsumer::consume() {
   cv.wait(lock, [this] { return !buffer.empty(); });
   int number = buffer.back();
   buffer.pop_back();
-  PrintThreadSafe::print("consumed: ", number);
+  ThreadSafePrint::print("consumed: ", number);
   cv.notify_all();
 }
 
@@ -25,6 +25,6 @@ void ProducerConsumer::produce() {
   cv.wait(lock, [this] { return buffer.size() < maxSize; });
   int number = rng.nextInt(1, 40);
   buffer.push_back(number);
-  PrintThreadSafe::print("produced: ", number);
+  ThreadSafePrint::print("produced: ", number);
   cv.notify_all();
 }

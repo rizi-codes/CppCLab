@@ -1,15 +1,15 @@
-#include "concurrency/PrintThreadSafe.h"
+#include "concurrency/ThreadSafePrint.h"
 #include <gtest/gtest.h>
 #include <thread>
 
 TEST(PrintThreadSafeTest, SimplePrintTest) {
-  EXPECT_NO_THROW(PrintThreadSafe::print("Testing", 123, true));
+  EXPECT_NO_THROW(ThreadSafePrint::print("Testing", 123, true));
 }
 
 TEST(PrintThreadSafeTest, ThreadSafetyTest) {
   auto worker = []() {
     for (int i = 0; i < 10; ++i) {
-      PrintThreadSafe::print("Thread message ", i);
+      ThreadSafePrint::print("Thread message ", i);
     }
   };
 

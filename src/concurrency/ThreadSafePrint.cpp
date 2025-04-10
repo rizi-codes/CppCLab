@@ -1,8 +1,8 @@
-#include "concurrency/PrintThreadSafe.h"
+#include "concurrency/ThreadSafePrint.h"
 #include <iostream>
 #include <mutex>
 #include <thread>
 
 using namespace std;
 
-std::mutex PrintThreadSafe::mtx;
+std::mutex ThreadSafePrint::mtx;

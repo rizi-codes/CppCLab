@@ -1,5 +1,5 @@
 #include "concurrency/ThreadSafeInt.h"
-#include "concurrency/PrintThreadSafe.h"
+#include "concurrency/ThreadSafePrint.h"
 
 void ThreadSafeInt::readInt() {
   std::unique_lock<std::mutex> lock(mtx);
@@ -8,7 +8,7 @@ void ThreadSafeInt::readInt() {
   readersCount++;
   lock.unlock();
 
-  PrintThreadSafe::print("Read: ", data);
+  ThreadSafePrint::print("Read: ", data);
 
   lock.lock();
   readersCount--;
@@ -26,7 +26,7 @@ void ThreadSafeInt::writeInt(int newValue) {
   lock.unlock();
 
   data = newValue;
-  PrintThreadSafe::print("Write: ", newValue);
+  ThreadSafePrint::print("Write: ", newValue);
 
   writerActive = false;
   reader_cv.notify_all();
