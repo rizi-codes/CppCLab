@@ -18,7 +18,7 @@ TARGET = $(BIN_DIR)/app
 TEST_TARGET = $(BIN_DIR)/tests
 
 # Main rule
-all: format-check cppcheck  $(TARGET) tests
+all: format format-check cppcheck  $(TARGET) tests
 
 # Linking main app
 $(TARGET): $(OBJS)
@@ -39,7 +39,8 @@ $(TEST_TARGET): $(wildcard $(TEST_DIR)/**/*.cpp) $(filter-out $(SRC_DIR)/main.cp
 
 # Run clang-format check (no file modifications, just checking)
 format-check:
-	find src include tests -regex '.*\.\(cpp\|h\)' | xargs clang-format --dry-run --Werror
+	find src include tests -type f \( -name "*.cpp" -o -name "*.h" \) -not -name ".*" -exec clang-format --dry-run --Werror {} +
+
 
 # Run cppcheck instead of clang-tidy
 cppcheck:
@@ -48,7 +49,8 @@ cppcheck:
 
 # Automatically fix formatting issues (modifies files)
 format:
-	find src include tests -regex '.*\.\(cpp\|h\)' -exec clang-format -i {} +
+	find src include tests -type f \( -name "*.cpp" -o -name "*.h" \) -not -name ".*" -exec clang-format -i {} +
+
 
 # Clean rule
 clean:

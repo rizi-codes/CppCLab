@@ -3,16 +3,20 @@
 
 #include <condition_variable>
 #include <mutex>
+#include <thread>
 
-class ThreadSafeData {
+class ThreadSafeInt {
 public:
-  void readData();
-  void writeData(int newValue);
+  void readInt();
+  void writeInt(int newValue);
 
 private:
   int data;
   std::mutex mtx;
-  std::condition_variable cv;
+  std::condition_variable reader_cv;
+  std::condition_variable writer_cv;
   int readersCount = 0;
   bool writerActive = false;
 };
+
+#endif
