@@ -3,10 +3,10 @@
 
 #include <random>
 
-class RandomGenerator {
+class random_generator {
 public:
-  RandomGenerator();
-  explicit RandomGenerator(unsigned seed);
+  random_generator();
+  explicit random_generator(unsigned seed);
 
   int nextInt(int low, int high);
   double nextDouble(double low, double high);

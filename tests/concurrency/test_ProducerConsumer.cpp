@@ -1,10 +1,10 @@
-#include "concurrency/ProducerConsumer.h"
+#include "concurrency/producer_consumer.h"
 #include "gtest/gtest.h"
 #include <thread>
 #include <vector>
 
-TEST(ProducerConsumerTest, MultipleProducersConsumers) {
-  ProducerConsumer pc(50);
+TEST(producer_consumerTest, MultipleProducersConsumers) {
+  producer_consumer pc(50);
 
   const int numProducers = 20;
   const int numConsumers = 10;

@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-class EasyQuestions {
+class easy_questions {
 public:
   void increment(int *number);
   void findMinMax(const int *arr, size_t size, int *min, int *max);

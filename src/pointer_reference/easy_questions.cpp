@@ -1,10 +1,10 @@
 #include "pointer_reference/easy_questions.h"
 #include <cstring>
 
-void EasyQuestions::increment(int *number) { *number = *number + 1; }
+void easy_questions::increment(int *number) { *number = *number + 1; }
 
-void EasyQuestions::findMinMax(const int *arr, size_t size, int *min,
-                               int *max) {
+void easy_questions::findMinMax(const int *arr, size_t size, int *min,
+                                int *max) {
   if (size == 0 || arr == nullptr) {
     return;
   }
@@ -25,7 +25,7 @@ void EasyQuestions::findMinMax(const int *arr, size_t size, int *min,
   }
 }
 
-void EasyQuestions::reverseString(char *str) {
+void easy_questions::reverseString(char *str) {
   if (str == nullptr) {
     return;
   }

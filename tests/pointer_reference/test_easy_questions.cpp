@@ -2,98 +2,98 @@
 #include "gtest/gtest.h"
 
 TEST(ReverseString, ReverseNonEmptyOddLengthString) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   char str[] = {'a', 'b', 'c', 'd', 'e'};
 
-  easyQuestions.reverseString(str);
+  easy_questions.reverseString(str);
   EXPECT_STREQ("edcba", str);
 }
 
 TEST(ReverseString, ReverseNonEmptyEvenLengthString) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   char str[] = {'a', 'b', 'c', 'd'};
 
-  easyQuestions.reverseString(str);
+  easy_questions.reverseString(str);
   EXPECT_STREQ("dcba", str);
 }
 
 TEST(IncrementTest, IncrementPositive) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   int value = 5;
-  easyQuestions.increment(&value);
+  easy_questions.increment(&value);
   EXPECT_EQ(value, 6);
 }
 
 TEST(FindMinMaxTest, NormalCase) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   int arr[] = {3, 1, 4, 2, 5};
   int min = 0, max = 0;
 
-  easyQuestions.findMinMax(arr, 5, &min, &max);
+  easy_questions.findMinMax(arr, 5, &min, &max);
 
   EXPECT_EQ(min, 1);
   EXPECT_EQ(max, 5);
 }
 
 TEST(FindMinMaxTest, SingleElement) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   int arr[] = {10};
   int min = 0, max = 0;
 
-  easyQuestions.findMinMax(arr, 1, &min, &max);
+  easy_questions.findMinMax(arr, 1, &min, &max);
 
   EXPECT_EQ(min, 10);
   EXPECT_EQ(max, 10);
 }
 
 TEST(FindMinMaxTest, AllSameElements) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   int arr[] = {7, 7, 7, 7};
   int min = 0, max = 0;
 
-  easyQuestions.findMinMax(arr, 4, &min, &max);
+  easy_questions.findMinMax(arr, 4, &min, &max);
 
   EXPECT_EQ(min, 7);
   EXPECT_EQ(max, 7);
 }
 
 TEST(FindMinMaxTest, NegativeElements) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   int arr[] = {-4, -1, -7, -3};
   int min = 0, max = 0;
 
-  easyQuestions.findMinMax(arr, 4, &min, &max);
+  easy_questions.findMinMax(arr, 4, &min, &max);
 
   EXPECT_EQ(min, -7);
   EXPECT_EQ(max, -1);
 }
 
 TEST(FindMinMaxTest, TwoElements) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   int arr[] = {100, 50};
   int min = 0, max = 0;
 
-  easyQuestions.findMinMax(arr, 2, &min, &max);
+  easy_questions.findMinMax(arr, 2, &min, &max);
 
   EXPECT_EQ(min, 50);
   EXPECT_EQ(max, 100);
 }
 
 TEST(FindMinMaxTest, EmptyArray) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   int min = -1, max = -1;
 
-  easyQuestions.findMinMax(nullptr, 0, &min, &max);
+  easy_questions.findMinMax(nullptr, 0, &min, &max);
 
   EXPECT_EQ(min, -1);
   EXPECT_EQ(max, -1);
 }
 
 TEST(FindMinMaxTest, NullArrayWithSize) {
-  EasyQuestions easyQuestions{};
+  easy_questions easy_questions{};
   int min = -1, max = -1;
 
-  easyQuestions.findMinMax(nullptr, 5, &min, &max);
+  easy_questions.findMinMax(nullptr, 5, &min, &max);
 
   EXPECT_EQ(min, -1);
   EXPECT_EQ(max, -1);

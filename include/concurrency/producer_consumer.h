@@ -1,14 +1,14 @@
-#ifndef PRODUCERCONSUMER_H
-#define PRODUCERCONSUMER_H
+#ifndef PRODUCER_CONSUMER_H
+#define PRODUCER_CONSUMER_H
 
-#include "util/RandomGenerator.h"
+#include "util/random_generator.h"
 #include <condition_variable>
 #include <mutex>
 #include <vector>
 
-class ProducerConsumer {
+class producer_consumer {
 public:
-  explicit ProducerConsumer(int maxSize);
+  explicit producer_consumer(int maxSize);
   void produce();
   void consume();
 
@@ -17,7 +17,7 @@ private:
   std::vector<int> buffer;
   std::mutex mtx;
   std::condition_variable cv;
-  RandomGenerator rng;
+  random_generator rng;
 };
 
 #endif

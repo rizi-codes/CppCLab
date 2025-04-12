@@ -1,13 +1,13 @@
-#ifndef THREADSAFEINT_H
-#define THREADSAFEINT_H
+#ifndef THREAD_SAFE_INT_H
+#define THREAD_SAFEI_NT_H
 
 #include <condition_variable>
 #include <mutex>
 #include <thread>
 
-class ThreadSafeInt {
+class thread_safe_int {
 public:
-  explicit ThreadSafeInt(int value);
+  explicit thread_safe_int(int value);
   void readInt();
   void writeInt(int newValue);
 
@@ -16,8 +16,8 @@ private:
   std::mutex mtx;
   std::condition_variable reader_cv;
   std::condition_variable writer_cv;
-  int readersCount = 0;
-  bool writerActive = false;
+  int readers_count = 0;
+  bool writer_active = false;
 };
 
 #endif

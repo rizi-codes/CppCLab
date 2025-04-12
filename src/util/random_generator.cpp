@@ -1,13 +1,13 @@
-#include "util/RandomGenerator.h"
+#include "util/random_generator.h"
 #include <exception>
 #include <random>
 #include <stdexcept>
 
-RandomGenerator::RandomGenerator() : gen(std::random_device{}()) {}
+random_generator::random_generator() : gen(std::random_device{}()) {}
 
-RandomGenerator::RandomGenerator(unsigned seed) : gen(seed) {}
+random_generator::random_generator(unsigned seed) : gen(seed) {}
 
-int RandomGenerator::nextInt(int low, int high) {
+int random_generator::nextInt(int low, int high) {
   if (high < low) {
     throw std::invalid_argument(
         "nextInt: first argument must be smaller than the second.");
@@ -17,7 +17,7 @@ int RandomGenerator::nextInt(int low, int high) {
   return dis(gen);
 }
 
-double RandomGenerator::nextDouble(double low, double high) {
+double random_generator::nextDouble(double low, double high) {
   if (high <= low) {
     throw std::invalid_argument(
         "nextDouble: first argument must be strictly less than the second.");
@@ -27,7 +27,7 @@ double RandomGenerator::nextDouble(double low, double high) {
   return dis(gen);
 }
 
-bool RandomGenerator::nextBool(double probability) {
+bool random_generator::nextBool(double probability) {
   if (probability < 0 || probability > 1) {
     throw std::invalid_argument("nextBool: argument must be in [0.0, 1.0]");
   }
