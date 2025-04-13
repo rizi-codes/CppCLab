@@ -13,7 +13,7 @@ public:
   void consume();
 
 private:
-  int maxSize;
+  size_t maxSize;
   std::vector<int> buffer;
   std::mutex mtx;
   std::condition_variable cv;
