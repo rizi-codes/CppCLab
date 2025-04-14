@@ -1,13 +1,15 @@
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Iinclude -g
-LDFLAGS = -pthread -lgtest -lgtest_main
+LDFLAGS = -pthread -lgtest -lgtest_main -lbenchmark
 
 # Directories
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
 TEST_DIR = tests
+BENCH_DIR = benchmarks
+BENCH_BIN_DIR = $(BIN_DIR)/benchmarks
 
 # Source and object files
 SRCS = $(wildcard $(SRC_DIR)/*.cpp $(SRC_DIR)/*/*.cpp)
@@ -17,8 +19,12 @@ OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 TARGET = $(BIN_DIR)/app
 TEST_TARGET = $(BIN_DIR)/tests
 
+# Find all benchmark cpp files
+BENCHMARK_SRCS = $(wildcard $(BENCH_DIR)/*.cpp)
+BENCHMARK_BINS = $(patsubst $(BENCH_DIR)/%.cpp,$(BENCH_BIN_DIR)/%,$(BENCHMARK_SRCS))
+
 # Main rule
-all: format format-check cppcheck  $(TARGET) tests
+all: format format-check cppcheck  $(TARGET) tests benchmarks
 
 # Linking main app
 $(TARGET): $(OBJS)
@@ -37,9 +43,16 @@ $(TEST_TARGET): $(wildcard $(TEST_DIR)/**/*.cpp) $(filter-out $(SRC_DIR)/main.cp
 	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 
+# Benchmark linking rule
+benchmarks: $(BENCHMARK_BINS)
+
+$(BENCH_BIN_DIR)/%: $(BENCH_DIR)/%.cpp $(filter-out $(SRC_DIR)/main.cpp,$(SRCS))
+	@mkdir -p $(BENCH_BIN_DIR)
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
+
 # Run clang-format check (no file modifications, just checking)
 format-check:
-	find src include tests -type f \( -name "*.cpp" -o -name "*.h" \) -not -name ".*" -exec clang-format --dry-run --Werror {} +
+	find src include tests benchmarks -type f \( -name "*.cpp" -o -name "*.h" \) -not -name ".*" -exec clang-format --dry-run --Werror {} +
 
 
 # Run cppcheck instead of clang-tidy
@@ -49,11 +62,11 @@ cppcheck:
 
 # Automatically fix formatting issues (modifies files)
 format:
-	find src include tests -type f \( -name "*.cpp" -o -name "*.h" \) -not -name ".*" -exec clang-format -i {} +
+	find src include tests benchmarks -type f \( -name "*.cpp" -o -name "*.h" \) -not -name ".*" -exec clang-format -i {} +
 
 
 # Clean rule
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
-.PHONY: all clean tests format-check cppcheck format
+.PHONY: all clean tests benchmarks format-check cppcheck format
