@@ -8,9 +8,12 @@
 
 template <typename T> class thread_safe_stack {
 public:
-  explicit thread_safe_stack() : size(0), write_active(false), head(nullptr) {}
+  explicit thread_safe_stack() : size(0), head(nullptr) {}
 
-  int get_size() { return size; }
+  int get_size() {
+    std::unique_lock<std::mutex> lock(mtx);
+    return size;
+  }
 
   void push(T data) {
     std::unique_lock<std::mutex> lock(mtx);
