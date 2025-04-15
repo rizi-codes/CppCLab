@@ -1,15 +1,17 @@
+#include "common/list_node.h"
+#include "concurrency/lock_free_stack.h"
 #include "concurrency/thread_safe_print.h"
-#include "concurrency/thread_safe_stack.h"
 #include "util/random_generator.h"
 #include "gtest/gtest.h"
 
+#include <thread>
 #include <vector>
 
-TEST(thread_safe_stack_test, test_multiple_readers_writers) {
-  thread_safe_stack<int> stack;
+TEST(test_lock_free_stack, multiple_reader_writers) {
+  lock_free_stack<int> stack;
   random_generator rng;
 
-  const int readers_number = 20;
+  const int readers_number = 10;
   const int writers_number = 10;
   const int reader_read = 2;
   const int writer_write = 3;

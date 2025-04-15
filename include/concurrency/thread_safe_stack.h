@@ -22,21 +22,22 @@ public:
     list_node<T> *node = new list_node<T>(data);
     node->next = head;
     head = node;
-    cv.notify_all();
   }
 
-  T pop() {
+  bool pop(T &result) {
     std::unique_lock<std::mutex> lock(mtx);
-    cv.wait(lock, [this] { return head != nullptr; });
+
+    if (head == nullptr) {
+      return false;
+    }
 
     size -= 1;
     list_node<T> *node = head;
     T data = node->data;
     head = node->next;
     delete node;
-    cv.notify_all();
-
-    return data;
+    result = data;
+    return true;
   }
 
   ~thread_safe_stack() {
@@ -51,7 +52,6 @@ public:
 
 private:
   std::mutex mtx;
-  std::condition_variable cv;
   list_node<T> *head;
   int size;
 };
