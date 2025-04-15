@@ -8,7 +8,7 @@
 
 template <typename T> class thread_safe_stack {
 public:
-  explicit thread_safe_stack() : size(0), head(nullptr) {}
+  explicit thread_safe_stack() : head(nullptr), size(0) {}
 
   int get_size() {
     std::unique_lock<std::mutex> lock(mtx);
@@ -27,7 +27,7 @@ public:
 
   T pop() {
     std::unique_lock<std::mutex> lock(mtx);
-    cv.wait(lock, [this] { return head != nullptr });
+    cv.wait(lock, [this] { return head != nullptr; });
 
     size -= 1;
     list_node<T> *node = head;
