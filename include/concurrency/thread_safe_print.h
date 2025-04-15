@@ -1,5 +1,5 @@
-#ifndef THREAD_SAFE_PRINT
-#define THREAD_SAFE_PRINT
+#ifndef THREAD_SAFE_PRINT_H
+#define THREAD_SAFE_PRINT_H
 
 #include <iostream>
 #include <mutex>
