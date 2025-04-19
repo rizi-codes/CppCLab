@@ -55,13 +55,14 @@ $(TEST_TARGET): $(shell find $(TEST_DIR) -type f \( -name '*.cpp' -o -name '*.c'
 
 # Benchmark linking rule
 benchmarks: $(BENCHMARK_BINS)
-
+# C++ benchmark
 $(BENCH_BIN_DIR)/%: $(BENCH_DIR)/%.cpp $(filter-out $(SRC_DIR)/main.cpp,$(SRCS))
-	@mkdir -p $(BENCH_BIN_DIR)
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 
+# C benchmark
 $(BENCH_BIN_DIR)/%: $(BENCH_DIR)/%.c $(filter-out $(SRC_DIR)/main.cpp,$(SRCS))
-	@mkdir -p $(BENCH_BIN_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 # Format and static check rules
