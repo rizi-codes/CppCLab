@@ -1,1 +1,1 @@
-Learning cpp/c by coding on different topics
+This repository contains practice projects and exercises in C and C++, focused on exploring various concepts.
